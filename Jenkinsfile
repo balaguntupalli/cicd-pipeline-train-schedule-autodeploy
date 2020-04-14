@@ -35,16 +35,8 @@ pipeline {
         }
         
         stage('DeployToProduction') {
-            when {
-                branch 'master'
-            }
             steps {
-                milestone(1)
-                kubernetesDeploy(
-                    kubeconfigId: 'kubeconfig',
-                    configs: 'train-schedule-kube.yml',
-                    enableConfigSubstitution: true
-                )
+                sh 'kubectl apply -f train-schedule-kube.yml'
             }
         }
     }
