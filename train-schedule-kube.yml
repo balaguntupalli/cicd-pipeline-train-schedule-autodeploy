@@ -45,5 +45,4 @@ spec:
         resources:
           requests:
             cpu: 200m
-      imagePullSecrets:
-      - name: us-east-1-ecr-registry
+
