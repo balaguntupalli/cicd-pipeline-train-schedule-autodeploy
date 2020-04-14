@@ -2,7 +2,7 @@ pipeline {
     agent any
     environment {
         //be sure to replace "sampriyadarshi" with your own Docker Hub username
-        DOCKER_IMAGE_NAME = "861614002005.dkr.ecr.us-east-1.amazonaws.com/trainapp"
+        DOCKER_IMAGE_NAME = "861614002005.dkr.ecr.us-east-1.amazonaws.com/bala"
         CANARY_REPLICAS = 0
     }
     stages {
@@ -32,7 +32,7 @@ pipeline {
             }
             steps {
                 script {
-                    docker.withRegistry('https://861614002005.dkr.ecr.us-east-1.amazonaws.com', 'ecr-cred') {
+                    withDockerRegistry(credentialsId: 'ecr:us-east-1:ecr-cred', url: '861614002005.dkr.ecr.us-east-1.amazonaws.com') {
                         app.push("${env.BUILD_NUMBER}")
                         app.push("latest")
                     }
@@ -71,4 +71,3 @@ pipeline {
         //}
    // }
 }
-
