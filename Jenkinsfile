@@ -1,6 +1,3 @@
-/* import shared library */
-@Library('jenkins-shared-library')_
-
 pipeline {
     agent any
     environment {
@@ -35,7 +32,7 @@ pipeline {
             }
             steps {
                 script {
-                    docker.withRegistry('861614002005.dkr.ecr.us-east-1.amazonaws.com', 'docker_hub_login') {
+                    docker.withRegistry('https://861614002005.dkr.ecr.us-east-1.amazonaws.com/trainapp', 'ecr-cred') {
                         app.push("${env.BUILD_NUMBER}")
                         app.push("latest")
                     }
@@ -74,3 +71,4 @@ pipeline {
         //}
    // }
 }
+© 2020 GitHub, Inc.
