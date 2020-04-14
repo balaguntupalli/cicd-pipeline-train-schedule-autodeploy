@@ -32,7 +32,7 @@ pipeline {
             }
             steps {
                 script {
-                    docker.withRegistry('https://861614002005.dkr.ecr.us-east-1.amazonaws.com/trainapp', 'ecr-cred') {
+                    docker.withRegistry('https://861614002005.dkr.ecr.us-east-1.amazonaws.com', 'ecr-cred') {
                         app.push("${env.BUILD_NUMBER}")
                         app.push("latest")
                     }
