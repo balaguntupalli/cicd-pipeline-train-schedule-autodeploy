@@ -45,7 +45,7 @@ pipeline {
             }
         }
     }
-    /*post {
+    post {
 	always {
             kubernetesDeploy (
                 kubeconfigId: 'kubeconfig',
@@ -53,12 +53,12 @@ pipeline {
                 enableConfigSubstitution: true
             )
         }
-	*/    
-        //cleanup {
+	    
+        cleanup {
 	    
 	    /* Use slackNotifier.groovy from shared library and provide current build result as parameter */   
         //    slackNotifier(currentBuild.currentResult)
-            // cleanWs()
-        //}
+             cleanWs()
+        }
    // }
 }
