@@ -2,8 +2,7 @@ pipeline {
     agent any
     environment {
         //be sure to replace "sampriyadarshi" with your own Docker Hub username
-        DOCKER_IMAGE_NAME = "861614002005.dkr.ecr.us-east-1.amazonaws.com/bala"
-        CANARY_REPLICAS = 0
+        DOCKER_IMAGE_NAME = "balabhaskararao/eks-demo-image"
     }
     stages {
         stage('Build') {
@@ -17,9 +16,6 @@ pipeline {
             steps {
                 script {
                     app = docker.build(DOCKER_IMAGE_NAME)
-                    app.inside {
-                        sh 'echo Hello, World!'
-                    }
                 }
             }
         }
