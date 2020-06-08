@@ -14,12 +14,8 @@ pipeline {
             }
         }
         stage('Push Docker Image') {
-            steps {
-                script {
-                    withDockerRegistry(credentialsId: 'ecr:ap-southeast-1:ecr-cred', url: 'https://063369903090.dkr.ecr.ap-southeast-1.amazonaws.com') {
-                        sh "docker push $DOCKER_IMAGE_NAME:$BUILD_NUMBER"
-                    }
-                }
+            docker.withRegistry('https://063369903090.dkr.ecr.ap-southeast-1.amazonaws.com', 'ecr:ap-southeast-1:ecr-cred') {
+                sh "docker push 063369903090.dkr.ecr.ap-southeast-1.amazonaws.com/enseval-demo:$BUILD_NUMBER"
             }
         }
         
