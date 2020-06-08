@@ -2,9 +2,7 @@ pipeline {
     agent any
     environment {
         //be sure to replace "sampriyadarshi" with your own Docker Hub username
-	DOCKER_IMAGE_NAME = "balabhaskarara/train-bala-1"
-        //DOCKER_IMAGE_NAME = "063369903090.dkr.ecr.ap-southeast-1.amazonaws.com/enseval-demo"
-        CANARY_REPLICAS = 0
+        DOCKER_IMAGE_NAME = "063369903090.dkr.ecr.ap-southeast-1.amazonaws.com/enseval-demo"
     }
     stages {
         stage('Build') {
@@ -24,17 +22,16 @@ pipeline {
                 }
             }
         }
-	stage('Push Docker Image') {
+        stage('Push Docker Image') {
             steps {
                 script {
-                    docker.withRegistry('https://registry.hub.docker.com', 'docker_hub_login') {
+                    withDockerRegistry(credentialsId: 'ecr:ap-southeast-1:ecr-cred', url: 'https://063369903090.dkr.ecr.ap-southeast-1.amazonaws.com') {
                         app.push("${env.BUILD_NUMBER}")
                         app.push("latest")
                     }
                 }
             }
         }
-
         
         stage('DeployToProduction') {
             steps {
